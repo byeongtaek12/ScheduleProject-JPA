@@ -1,3 +1,4 @@
+USE schedulev2;
 CREATE TABLE schedulev2
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '일정 식별자',
