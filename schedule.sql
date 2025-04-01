@@ -2,12 +2,12 @@ USE schedulev2;
 CREATE TABLE schedulev2
 (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '일정 식별자',
-    user_id BIGINT COMMENT '유저 식별자',
+    writer_id BIGINT COMMENT '유저 식별자',
     title VARCHAR(100) COMMENT '제목',
     contents VARCHAR(200) COMMENT '내용',
     createdAt DATETIME COMMENT '작성일',
     modifiedAt DATETIME COMMENT '수정일',
-    FOREIGN KEY (user_id) REFERENCES writer(id)
+    FOREIGN KEY (writer_id) REFERENCES writer(id)
 );
 
 CREATE TABLE writer
