@@ -2,7 +2,7 @@
 
 ![erd.PNG](png/erd.PNG)
 
-![schedul api.PNG](png/schedul%20api.PNG)
+![schedule api.PNG](png/schedule%20api.PNG)
 
 ![writer api.PNG](png/writer%20api.PNG)
 
