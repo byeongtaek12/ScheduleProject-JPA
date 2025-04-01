@@ -21,5 +21,13 @@ public class Writer extends BaseEntity{
     @Column(nullable = false)
     private String password;
 
+    public Writer() {
 
+    }
+
+    public Writer(String writer, String email, String password) {
+        this.writer = writer;
+        this.email = email;
+        this.password = password;
+    }
 }
