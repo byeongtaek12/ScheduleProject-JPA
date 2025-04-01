@@ -20,5 +20,15 @@ public class Schedulev2 extends BaseEntity{
 
     private String contents;
 
+    public Schedulev2() {
+
+    }
+
+    public Schedulev2(Writer writer, String title, String contents) {
+        this.writer=writer;
+        this.title=title;
+        this.contents=contents;
+    }
+
 
 }
