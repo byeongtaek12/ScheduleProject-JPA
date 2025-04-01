@@ -15,12 +15,14 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping("(/{writer_id}")
+    @PostMapping("/{writer_id}")
     public ResponseEntity<ScheduleResponseDto> saveSchedule(
             @PathVariable Long writer_id,
             @RequestBody CreateScheduleRequestDto requestDto) {
 
-        ScheduleResponseDto savedSchedule = scheduleService.save(writer_id, requestDto.getTitle(), requestDto.getContents());
+        ScheduleResponseDto savedSchedule = scheduleService.save(writer_id, requestDto.getTitle(),
+                requestDto.getContents());
+
         return new ResponseEntity<>(savedSchedule,HttpStatus.CREATED);
     }
 
