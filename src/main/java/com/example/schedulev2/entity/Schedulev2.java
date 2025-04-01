@@ -13,13 +13,12 @@ public class Schedulev2 extends BaseEntity{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(Writer())
-    private Long user_id;
+    @JoinColumn(name = "writer_id")
+    private Writer writer;
 
     private String title;
 
     private String contents;
-
 
 
 }
