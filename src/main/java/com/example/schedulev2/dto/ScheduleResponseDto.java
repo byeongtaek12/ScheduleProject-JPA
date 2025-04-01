@@ -6,17 +6,17 @@ import java.time.LocalDateTime;
 @Getter
 public class ScheduleResponseDto {
 
-    private Long id;
+    private final Long id;
 
-    private Long writer_id;
+    private final Long writer_id;
 
-    private String title;
+    private final String title;
 
-    private String contents;
+    private final String contents;
 
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
 
-    private LocalDateTime modifiedAt;
+    private final LocalDateTime modifiedAt;
 
     public ScheduleResponseDto(Long id, Long writer_id, String title, String contents, LocalDateTime createdAt,
                                LocalDateTime modifiedAt) {

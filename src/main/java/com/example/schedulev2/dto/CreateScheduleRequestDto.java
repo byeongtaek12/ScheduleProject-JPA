@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class CreateScheduleRequestDto {
 
-    private String title;
+    private final String title;
 
-    private String contents;
+    private final String contents;
 
 }
