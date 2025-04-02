@@ -3,6 +3,8 @@ package com.example.schedulev2.controller;
 import com.example.schedulev2.dto.LoginResponseDto;
 import com.example.schedulev2.dto.WriterRequestDto;
 import com.example.schedulev2.service.WriterService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +28,14 @@ public class LoginController {
 
     @GetMapping
     public ResponseEntity<LoginResponseDto> login(@RequestParam ("email") String email,
-                                                  @RequestParam ("password") String password) {
+                                                  @RequestParam ("password") String password,
+                                                  HttpServletRequest request) {
 
         LoginResponseDto loginResponseDto = writerService.login(email, password);
+
+        HttpSession httpSession = request.getSession(true);
+
+        httpSession.setAttribute("sessionKey", email.charAt(0)+password.charAt(0));
 
         return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
