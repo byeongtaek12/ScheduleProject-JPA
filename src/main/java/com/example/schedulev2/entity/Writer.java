@@ -2,8 +2,10 @@ package com.example.schedulev2.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "writer")
 public class Writer extends BaseEntity{
