@@ -18,15 +18,6 @@ public class WriterController {
 
     private final WriterService writerService;
 
-    @PostMapping
-    public ResponseEntity<WriterResponseDto> signUp(@RequestBody WriterRequestDto requestDto) {
-
-        WriterResponseDto signUpResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
-                requestDto.getPassword());
-
-        return new ResponseEntity<>(signUpResponseDto,HttpStatus.CREATED);
-    }
-
     @GetMapping
     public ResponseEntity<List<WriterResponseDto>> findAll() {
         List<WriterResponseDto> writerResponseDtoList = writerService.findAll();
