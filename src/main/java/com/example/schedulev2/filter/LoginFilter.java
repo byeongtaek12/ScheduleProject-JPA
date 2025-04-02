@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 
 public class LoginFilter implements Filter {
-    private static final String  White_List = "/login";
+    private static final String  WHITE_LIST = "/login";  // 대문자로
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -21,7 +21,7 @@ public class LoginFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if (!White_List.equals(requestURI)) {
+        if (!WHITE_LIST.equals(requestURI)) {
             HttpSession httpSession = request.getSession(false);
 
             if (httpSession==null || httpSession.getAttribute("sessionKey")==null) {
