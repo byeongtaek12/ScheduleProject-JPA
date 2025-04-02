@@ -31,4 +31,15 @@ public class WriterServiceImpl implements WriterService{
         return writerRepository.findAll().stream().map(WriterResponseDto::new).toList();
 
     }
+
+    @Override
+    public WriterResponseDto findById(Long id) {
+
+        Writer findWriter = writerRepository.findByIdOrElseThrow(id);
+
+        return new WriterResponseDto(findWriter.getId(),findWriter.getWriter(),findWriter.getCreatedAt(),
+                findWriter.getModifiedAt());
+    }
+
+
 }
