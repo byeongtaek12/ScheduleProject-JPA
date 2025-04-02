@@ -1,7 +1,8 @@
 package com.example.schedulev2.controller;
 
-import com.example.schedulev2.dto.SignUpRequestDto;
+import com.example.schedulev2.dto.WriterRequestDto;
 import com.example.schedulev2.dto.WriterResponseDto;
+import com.example.schedulev2.dto.WriterUpdateResponseDto;
 import com.example.schedulev2.service.WriterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class WriterController {
     private final WriterService writerService;
 
     @PostMapping
-    public ResponseEntity<WriterResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
+    public ResponseEntity<WriterResponseDto> signUp(@RequestBody WriterRequestDto requestDto) {
 
         WriterResponseDto signUpResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
                 requestDto.getPassword());
@@ -40,5 +41,14 @@ public class WriterController {
         return new ResponseEntity<>(writerResponseDto,HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<WriterUpdateResponseDto> update(@PathVariable Long id,
+                                                                @RequestBody WriterRequestDto writerRequestDto) {
+
+        WriterUpdateResponseDto writerUpdateResponseDto = writerService.updateWriter(id,
+                writerRequestDto);
+
+        return new ResponseEntity<>(writerUpdateResponseDto,HttpStatus.OK);
+    }
 
 }
