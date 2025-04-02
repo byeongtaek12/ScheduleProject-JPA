@@ -51,4 +51,11 @@ public class WriterController {
         return new ResponseEntity<>(writerUpdateResponseDto,HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        writerService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
