@@ -32,5 +32,13 @@ public class WriterController {
         return new ResponseEntity<>(writerResponseDtoList,HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<WriterResponseDto> findById(@PathVariable Long id) {
+
+        WriterResponseDto writerResponseDto = writerService.findById(id);
+
+        return new ResponseEntity<>(writerResponseDto,HttpStatus.OK);
+    }
+
 
 }
