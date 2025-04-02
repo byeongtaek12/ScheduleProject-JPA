@@ -1,5 +1,6 @@
 package com.example.schedulev2.service;
 
+import com.example.schedulev2.dto.LoginResponseDto;
 import com.example.schedulev2.dto.WriterRequestDto;
 import com.example.schedulev2.dto.WriterResponseDto;
 import com.example.schedulev2.dto.WriterUpdateResponseDto;
@@ -17,14 +18,21 @@ public class WriterServiceImpl implements WriterService{
     private final WriterRepository writerRepository;
 
     @Override
-    public WriterResponseDto signUp(String writer, String email, String password) {
+    public LoginResponseDto signUp(String writer, String email, String password) {
 
         Writer writer1 = new Writer(writer, email, password);
 
         Writer savedWriter = writerRepository.save(writer1);
 
-        return new WriterResponseDto(savedWriter.getId(),savedWriter.getWriter(), LocalDateTime.now(),
-                LocalDateTime.now());
+        return new LoginResponseDto(savedWriter.getId(),savedWriter.getWriter());
+    }
+
+    @Override
+    public LoginResponseDto login(String email, String password) {
+
+        Writer findWriter = writerRepository.findWriterByEmailAndPasswordOrElseThrow(email, password);
+
+        return new LoginResponseDto(findWriter.getId(),findWriter.getWriter());
     }
 
     @Override
@@ -74,6 +82,8 @@ public class WriterServiceImpl implements WriterService{
 
         writerRepository.delete(findWriter);
     }
+
+
 
 
 }
