@@ -14,4 +14,6 @@ public interface WriterService {
     WriterResponseDto findById(Long id);
 
     WriterUpdateResponseDto updateWriter(Long id, WriterRequestDto writerRequestDto);
+
+    void delete(Long id);
 }
