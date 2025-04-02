@@ -67,6 +67,13 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    @Override
+    public void delete(Long id) {
+
+        Writer findWriter = writerRepository.findByIdOrElseThrow(id);
+
+        writerRepository.delete(findWriter);
+    }
 
 
 }
