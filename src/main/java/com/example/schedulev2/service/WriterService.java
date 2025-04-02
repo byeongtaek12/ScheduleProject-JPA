@@ -8,4 +8,6 @@ public interface WriterService {
     WriterResponseDto signUp(String writer, String email, String password);
 
     List<WriterResponseDto> findAll();
+
+    WriterResponseDto findById(Long id);
 }
