@@ -1,6 +1,8 @@
 package com.example.schedulev2.service;
 
+import com.example.schedulev2.dto.WriterRequestDto;
 import com.example.schedulev2.dto.WriterResponseDto;
+import com.example.schedulev2.dto.WriterUpdateResponseDto;
 import com.example.schedulev2.entity.Writer;
 import com.example.schedulev2.repository.WriterRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,31 @@ public class WriterServiceImpl implements WriterService{
         return new WriterResponseDto(findWriter.getId(),findWriter.getWriter(),findWriter.getCreatedAt(),
                 findWriter.getModifiedAt());
     }
+
+    @Override
+    public WriterUpdateResponseDto updateWriter(Long id, WriterRequestDto writerRequestDto) {
+
+        Writer findWriter = writerRepository.findByIdOrElseThrow(id);
+
+        if (writerRequestDto.getWriter()!=null) {
+            findWriter.setWriter(writerRequestDto.getWriter());
+        }
+
+        if (writerRequestDto.getEmail()!=null) {
+            findWriter.setEmail(writerRequestDto.getEmail());
+        }
+
+        if (writerRequestDto.getPassword()!=null) {
+            findWriter.setPassword(writerRequestDto.getPassword());
+        }
+
+        writerRepository.save(findWriter);
+
+        return new WriterUpdateResponseDto(findWriter.getId(),findWriter.getWriter(),findWriter.getEmail(),
+                findWriter.getPassword(),findWriter.getCreatedAt(),LocalDateTime.now());
+
+    }
+
 
 
 }
