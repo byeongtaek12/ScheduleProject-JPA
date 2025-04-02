@@ -20,10 +20,10 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<LoginResponseDto> signUp(@RequestBody WriterRequestDto requestDto) {
 
-        LoginResponseDto signUpResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
+        LoginResponseDto loginResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
                 requestDto.getPassword());
 
-        return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(loginResponseDto, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -35,7 +35,7 @@ public class LoginController {
 
         HttpSession httpSession = request.getSession(true);
 
-        httpSession.setAttribute("sessionKey", email.charAt(0)+password.charAt(0));
+        httpSession.setAttribute("sessionKey", loginResponseDto.getId());
 
         return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
