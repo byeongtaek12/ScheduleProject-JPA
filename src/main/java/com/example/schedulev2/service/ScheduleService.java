@@ -10,4 +10,8 @@ public interface ScheduleService {
     List<ScheduleResponseDto> findAllSchedule(Long writer_id);
 
     ScheduleResponseDto findScheduleById(Long writer_id, Long id);
+
+    ScheduleResponseDto updateSchedule(Long writer_id, Long id);
+
+    void deleteSchedule(Long writer_id, Long id);
 }
