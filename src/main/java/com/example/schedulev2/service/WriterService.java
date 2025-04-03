@@ -10,13 +10,13 @@ import java.util.List;
 public interface WriterService {
     LoginResponseDto signUp(String writer, String email, String password);
 
-    List<WriterResponseDto> findAll();
+    LoginResponseDto login(String email, String password);
 
-    WriterResponseDto findById(Long id);
+    List<WriterResponseDto> findAllWriter();
+
+    WriterResponseDto findWriterById(Long id);
 
     WriterUpdateResponseDto updateWriter(Long id, WriterRequestDto writerRequestDto);
 
-    void delete(Long id);
-
-    LoginResponseDto login(String email, String password);
+    void deleteWriter(Long id);
 }
