@@ -1,10 +1,11 @@
 package com.example.schedulev2.controller;
 
-import com.example.schedulev2.dto.LoginResponseDto;
-import com.example.schedulev2.dto.writerDto.WriterRequestDto;
+import com.example.schedulev2.dto.loginDto.LoginReqeustDto;
+import com.example.schedulev2.dto.loginDto.LoginResponseDto;
 import com.example.schedulev2.service.writerService.WriterService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class LoginController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<LoginResponseDto> signUp(@RequestBody WriterRequestDto requestDto) {
+    public ResponseEntity<LoginResponseDto> signUp(@Valid @RequestBody LoginReqeustDto requestDto) {
 
         LoginResponseDto loginResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
                 requestDto.getPassword());
