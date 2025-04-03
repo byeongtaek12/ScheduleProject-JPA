@@ -4,6 +4,8 @@ import com.example.schedulev2.dto.WriterRequestDto;
 import com.example.schedulev2.dto.WriterResponseDto;
 import com.example.schedulev2.dto.WriterUpdateResponseDto;
 import com.example.schedulev2.service.WriterService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,45 +21,44 @@ public class WriterController {
     private final WriterService writerService;
 
     @GetMapping
-    public ResponseEntity<List<WriterResponseDto>> findAllWriter() {
+    public ResponseEntity<List<WriterResponseDto>> findAllWriter(HttpServletRequest httpServletRequest) {
 
-        List<WriterResponseDto> writerResponseDtoList = writerService.findAllWriter();
+        List<WriterResponseDto> writerResponseDtoList = writerService.findAllWriter(getSessionKey(httpServletRequest));
 
         return new ResponseEntity<>(writerResponseDtoList,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WriterResponseDto> findWriterById(@PathVariable Long id) {
+    public ResponseEntity<WriterResponseDto> findWriterById(@PathVariable Long id,
+                                                            HttpServletRequest httpServletRequest) {
 
-        WriterResponseDto writerResponseDto = writerService.findWriterById(id);
+        WriterResponseDto writerResponseDto = writerService.findWriterById(getSessionKey(httpServletRequest),id);
 
         return new ResponseEntity<>(writerResponseDto,HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<WriterUpdateResponseDto> updateWriter(@PathVariable Long id,
-                                                                @RequestBody WriterRequestDto writerRequestDto) {
+                                                                @RequestBody WriterRequestDto writerRequestDto,
+                                                                HttpServletRequest httpServletRequest) {
 
-        WriterUpdateResponseDto writerUpdateResponseDto = writerService.updateWriter(id,
-                writerRequestDto);
+        WriterUpdateResponseDto writerUpdateResponseDto = writerService.updateWriter(getSessionKey(httpServletRequest),
+                id, writerRequestDto);
 
         return new ResponseEntity<>(writerUpdateResponseDto,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWriter(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWriter(@PathVariable Long id, HttpServletRequest httpServletRequest) {
 
-        writerService.deleteWriter(id);
+        writerService.deleteWriter(getSessionKey(httpServletRequest),id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    private boolean isSession(HttpServletRequest httpServletRequest) {
-//        HttpSession session = httpServletRequest.getSession(false);
-//
-//        if (session==null || session.getAttribute("sessionKey")==null) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED," 로그인을 한 다음 이용해주세요");
-//        }
-//        return true;
-//    }
+    private Long getSessionKey(HttpServletRequest httpServletRequest) {
+        HttpSession session = httpServletRequest.getSession(false);
+        return (Long) session.getAttribute("sessionKey");
+    }
+
 }
