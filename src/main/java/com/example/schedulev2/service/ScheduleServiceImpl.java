@@ -35,9 +35,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public List<ScheduleResponseDto> findAllSchedule(Long writer_id) {
 
-        if (writer_id==null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
-        }
+        checkSessionKey(writer_id);
 
         return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();
                                                   //.map(a-> new ScheduleResponseDto(a))과 같음
@@ -46,31 +44,18 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public ScheduleResponseDto findScheduleById(Long writer_id, Long id) {
 
-        if (writer_id==null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
-        }
+        checkSessionKey(writer_id);
 
-        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Does not exist id: " + id)
-        );
+        return new ScheduleResponseDto(findScheduleById(id));
 
-        return new ScheduleResponseDto(findSchedule);
     }
 
     @Override
     public ScheduleResponseDto updateSchedule(Long writer_id, Long id) {
 
-        if (writer_id==null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
-        }
+        checkSessionKey(writer_id);
 
-        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Does not exist id: " + id)
-        );
-
-        Schedulev2 updateSchedule = scheduleRepository.save(findSchedule);
+        Schedulev2 updateSchedule = scheduleRepository.save(findScheduleById(id));
 
         return new ScheduleResponseDto(updateSchedule);
 
@@ -79,17 +64,22 @@ public class ScheduleServiceImpl implements ScheduleService{
     @Override
     public void deleteSchedule(Long writer_id, Long id) {
 
+        checkSessionKey(writer_id);
+
+        scheduleRepository.delete(findScheduleById(id));
+
+    }
+
+    private void checkSessionKey(Long writer_id) {
         if (writer_id==null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
         }
-
-        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Does not exist id: " + id)
-        );
-
-        scheduleRepository.delete(findSchedule);
     }
 
+    private Schedulev2 findScheduleById(Long id) {
 
+        return scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Does not exist id: " + id));
+
+    }
 }
