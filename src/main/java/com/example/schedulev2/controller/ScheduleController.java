@@ -23,7 +23,7 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponseDto> saveSchedule(@RequestBody CreateScheduleRequestDto requestDto,
                                                             HttpServletRequest httpServletRequest) {
 
-        ScheduleResponseDto savedSchedule = scheduleService.save(getSessionKey(httpServletRequest), requestDto.getTitle(),
+        ScheduleResponseDto savedSchedule = scheduleService.saveSchedule(getSessionKey(httpServletRequest), requestDto.getTitle(),
                 requestDto.getContents());
 
         return new ResponseEntity<>(savedSchedule,HttpStatus.CREATED);

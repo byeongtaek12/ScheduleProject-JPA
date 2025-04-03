@@ -20,7 +20,7 @@ public class ScheduleServiceImpl implements ScheduleService{
     private final WriterRepository writerRepository;
 
     @Override
-    public ScheduleResponseDto save(Long writer_id, String title, String contents) {
+    public ScheduleResponseDto saveSchedule(Long writer_id, String title, String contents) {
 
         Writer findWriter = writerRepository.findByIdOrElseThrow(writer_id);
 
