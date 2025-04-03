@@ -50,12 +50,45 @@ public class ScheduleServiceImpl implements ScheduleService{
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
         }
 
-        Schedulev2 schedulev2 = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
+        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "Does not exist id: " + id)
         );
 
-        return new ScheduleResponseDto(schedulev2);
+        return new ScheduleResponseDto(findSchedule);
+    }
+
+    @Override
+    public ScheduleResponseDto updateSchedule(Long writer_id, Long id) {
+
+        if (writer_id==null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
+        }
+
+        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Does not exist id: " + id)
+        );
+
+        Schedulev2 updateSchedule = scheduleRepository.save(findSchedule);
+
+        return new ScheduleResponseDto(updateSchedule);
+
+    }
+
+    @Override
+    public void deleteSchedule(Long writer_id, Long id) {
+
+        if (writer_id==null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
+        }
+
+        Schedulev2 findSchedule = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Does not exist id: " + id)
+        );
+
+        scheduleRepository.delete(findSchedule);
     }
 
 
