@@ -19,21 +19,23 @@ public class WriterController {
     private final WriterService writerService;
 
     @GetMapping
-    public ResponseEntity<List<WriterResponseDto>> findAll() {
-        List<WriterResponseDto> writerResponseDtoList = writerService.findAll();
+    public ResponseEntity<List<WriterResponseDto>> findAllWriter() {
+
+        List<WriterResponseDto> writerResponseDtoList = writerService.findAllWriter();
+
         return new ResponseEntity<>(writerResponseDtoList,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WriterResponseDto> findById(@PathVariable Long id) {
+    public ResponseEntity<WriterResponseDto> findWriterById(@PathVariable Long id) {
 
-        WriterResponseDto writerResponseDto = writerService.findById(id);
+        WriterResponseDto writerResponseDto = writerService.findWriterById(id);
 
         return new ResponseEntity<>(writerResponseDto,HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<WriterUpdateResponseDto> update(@PathVariable Long id,
+    public ResponseEntity<WriterUpdateResponseDto> updateWriter(@PathVariable Long id,
                                                                 @RequestBody WriterRequestDto writerRequestDto) {
 
         WriterUpdateResponseDto writerUpdateResponseDto = writerService.updateWriter(id,
@@ -43,10 +45,19 @@ public class WriterController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWriter(@PathVariable Long id) {
 
-        writerService.delete(id);
+        writerService.deleteWriter(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    private boolean isSession(HttpServletRequest httpServletRequest) {
+//        HttpSession session = httpServletRequest.getSession(false);
+//
+//        if (session==null || session.getAttribute("sessionKey")==null) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED," 로그인을 한 다음 이용해주세요");
+//        }
+//        return true;
+//    }
 }
