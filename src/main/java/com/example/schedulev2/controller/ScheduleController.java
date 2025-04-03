@@ -48,6 +48,24 @@ public class ScheduleController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable Long id,
+                                                              HttpServletRequest httpServletRequest) {
+
+        ScheduleResponseDto scheduleResponseDto = scheduleService.updateSchedule(getSessionKey(httpServletRequest), id);
+
+        return new ResponseEntity<>(scheduleResponseDto,HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable Long id, HttpServletRequest httpServletRequest) {
+
+        scheduleService.deleteSchedule(getSessionKey(httpServletRequest),id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 
     private Long getSessionKey(HttpServletRequest httpServletRequest) {
