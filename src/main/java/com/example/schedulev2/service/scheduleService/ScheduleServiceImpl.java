@@ -23,8 +23,10 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public ScheduleResponseDto saveSchedule(Long writer_id, String title, String contents) {
 
-        Writer findWriter = writerRepository.findById(writer_id).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Does not exist writer_id: " + writer_id));
+        checkSessionKey(writer_id);
+
+        // 위에서 null 체크해줬기 때문에 null 반환이 될 수가 없음
+        Writer findWriter = writerRepository.findById(writer_id).get();
 
         Schedulev2 schedulev2 = new Schedulev2(findWriter, title, contents);
 
