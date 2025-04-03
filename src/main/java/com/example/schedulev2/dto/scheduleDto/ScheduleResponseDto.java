@@ -1,4 +1,4 @@
-package com.example.schedulev2.dto;
+package com.example.schedulev2.dto.scheduleDto;
 
 import com.example.schedulev2.entity.Schedulev2;
 import lombok.Getter;
@@ -30,7 +30,9 @@ public class ScheduleResponseDto {
     }
 
     public ScheduleResponseDto(Schedulev2 schedulev2) {
+
         this(schedulev2.getId(),schedulev2.getWriter().getId(),schedulev2.getTitle(), schedulev2.getContents(),
                 schedulev2.getCreatedAt(),schedulev2.getModifiedAt());
+
     }
 }
