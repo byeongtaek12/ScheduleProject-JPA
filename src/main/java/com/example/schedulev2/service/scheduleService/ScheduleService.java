@@ -1,6 +1,6 @@
-package com.example.schedulev2.service;
+package com.example.schedulev2.service.scheduleService;
 
-import com.example.schedulev2.dto.ScheduleResponseDto;
+import com.example.schedulev2.dto.scheduleDto.ScheduleResponseDto;
 
 import java.util.List;
 

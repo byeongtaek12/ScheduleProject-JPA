@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    // 로그인 필터 빈 수동 등록 메서드
     @Bean
     public FilterRegistrationBean loginFilter() {
 

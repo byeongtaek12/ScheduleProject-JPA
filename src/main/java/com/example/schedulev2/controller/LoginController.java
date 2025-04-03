@@ -1,8 +1,8 @@
 package com.example.schedulev2.controller;
 
 import com.example.schedulev2.dto.LoginResponseDto;
-import com.example.schedulev2.dto.WriterRequestDto;
-import com.example.schedulev2.service.WriterService;
+import com.example.schedulev2.dto.writerDto.WriterRequestDto;
+import com.example.schedulev2.service.writerService.WriterService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,8 @@ public class LoginController {
 
     private final WriterService writerService;
 
-    @PostMapping
+    // 회원가입
+    @PostMapping("/signup")
     public ResponseEntity<LoginResponseDto> signUp(@RequestBody WriterRequestDto requestDto) {
 
         LoginResponseDto loginResponseDto = writerService.signUp(requestDto.getWriter(), requestDto.getEmail(),
@@ -26,7 +27,8 @@ public class LoginController {
         return new ResponseEntity<>(loginResponseDto, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    // 로그인
+    @PostMapping
     public ResponseEntity<LoginResponseDto> login(@RequestParam ("email") String email,
                                                   @RequestParam ("password") String password,
                                                   HttpServletRequest request) {

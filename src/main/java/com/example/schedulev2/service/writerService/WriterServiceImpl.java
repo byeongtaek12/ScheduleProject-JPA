@@ -1,9 +1,9 @@
-package com.example.schedulev2.service;
+package com.example.schedulev2.service.writerService;
 
 import com.example.schedulev2.dto.LoginResponseDto;
-import com.example.schedulev2.dto.WriterRequestDto;
-import com.example.schedulev2.dto.WriterResponseDto;
-import com.example.schedulev2.dto.WriterUpdateResponseDto;
+import com.example.schedulev2.dto.writerDto.WriterRequestDto;
+import com.example.schedulev2.dto.writerDto.WriterResponseDto;
+import com.example.schedulev2.dto.writerDto.WriterUpdateResponseDto;
 import com.example.schedulev2.entity.Writer;
 import com.example.schedulev2.repository.WriterRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,9 +16,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WriterServiceImpl implements WriterService{
+public class WriterServiceImpl implements WriterService {
     private final WriterRepository writerRepository;
 
+
+    // writerService) 회원가입 메서드
     @Override
     public LoginResponseDto signUp(String writer, String email, String password) {
 
@@ -29,6 +31,7 @@ public class WriterServiceImpl implements WriterService{
         return new LoginResponseDto(savedWriter.getId(),savedWriter.getWriter());
     }
 
+    // writerService) 로그인 메서드
     @Override
     public LoginResponseDto login(String email, String password) {
 
@@ -39,6 +42,7 @@ public class WriterServiceImpl implements WriterService{
         return new LoginResponseDto(findWriter.getId(),findWriter.getWriter());
     }
 
+    // writerService) 모든 유저 조회 메서드
     @Override
     public List<WriterResponseDto> findAllWriter(Long writer_id) {
 
@@ -48,6 +52,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // writerService) 유저 조회 메서드
     @Override
     public WriterResponseDto findWriterById(Long writer_id,Long id) {
 
@@ -58,6 +63,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // writerService) 유저 수정 메서드
     @Override
     public WriterUpdateResponseDto updateWriter(Long writer_id,Long id, WriterRequestDto writerRequestDto) {
 
@@ -74,6 +80,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // writerService) 유저 삭제 메서드
     @Override
     public void deleteWriter(Long writer_id,Long id) {
 
@@ -83,6 +90,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // 세션키가 있는지 체크하는 메서드
     private void checkSessionKey(Long writer_id) {
 
         if (writer_id==null) {
@@ -91,6 +99,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // 아이디값을 받아 그 값의 유저가 존재하는지 확인하는 메서드
     private Writer findWriter(Long id) {
 
         return writerRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -98,6 +107,7 @@ public class WriterServiceImpl implements WriterService{
 
     }
 
+    // 널이 아닌 값을 수정해주는 메서드
     private void notNullSetWriter(WriterRequestDto writerRequestDto, Writer findWriter) {
         if (writerRequestDto.getWriter()!=null) {
             findWriter.setWriter(writerRequestDto.getWriter());
