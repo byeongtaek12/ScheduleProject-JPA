@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -33,7 +32,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         Schedulev2 savedSchedule = scheduleRepository.save(schedulev2);
 
         return new ScheduleResponseDto(savedSchedule.getId(),savedSchedule.getWriter().getId(),
-                savedSchedule.getTitle(),savedSchedule.getContents(), LocalDateTime.now(),LocalDateTime.now());
+                savedSchedule.getTitle(),savedSchedule.getContents(), savedSchedule.getCreatedAt(),
+                savedSchedule.getModifiedAt());
     }
 
     // service) 모든 일정 조회 메서드
