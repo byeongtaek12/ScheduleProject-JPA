@@ -70,6 +70,7 @@ public class ScheduleController {
         scheduleService.deleteSchedule(getSessionKey(httpServletRequest),id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 
 

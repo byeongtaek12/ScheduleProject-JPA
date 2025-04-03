@@ -58,7 +58,7 @@ public class WriterController {
 
         writerService.deleteWriter(getSessionKey(httpServletRequest),id);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // 세션키 받는 메서드
