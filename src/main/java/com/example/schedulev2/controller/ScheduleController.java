@@ -5,6 +5,7 @@ import com.example.schedulev2.dto.scheduleDto.ScheduleResponseDto;
 import com.example.schedulev2.service.scheduleService.ScheduleService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class ScheduleController {
 
     // 일정 저장 메서드
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> saveSchedule(@RequestBody CreateScheduleRequestDto requestDto,
+    public ResponseEntity<ScheduleResponseDto> saveSchedule(@Valid @RequestBody CreateScheduleRequestDto requestDto,
                                                             HttpServletRequest httpServletRequest) {
 
         ScheduleResponseDto savedSchedule = scheduleService.saveSchedule(getSessionKey(httpServletRequest),
