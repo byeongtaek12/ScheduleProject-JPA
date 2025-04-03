@@ -20,7 +20,6 @@ public interface WriterRepository extends JpaRepository<Writer, Long> {
 
     default Writer findWriterByEmailAndPasswordOrElseThrow(String email, String password) {
         return findWriterByEmailAndPassword(email,password).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.UNAUTHORIZED,
-                "이메일이나 패스워드가 틀려서 로그인 실패했습니다."));
+                HttpStatus.UNAUTHORIZED, "이메일이나 패스워드가 틀려서 로그인 실패했습니다."));
     }
 }
