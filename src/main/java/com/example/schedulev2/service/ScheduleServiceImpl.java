@@ -40,5 +40,23 @@ public class ScheduleServiceImpl implements ScheduleService{
         }
 
         return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();
+                                                  //.map(a-> new ScheduleResponseDto(a))과 같음
     }
+
+    @Override
+    public ScheduleResponseDto findScheduleById(Long writer_id, Long id) {
+
+        if (writer_id==null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
+        }
+
+        Schedulev2 schedulev2 = scheduleRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Does not exist id: " + id)
+        );
+
+        return new ScheduleResponseDto(schedulev2);
+    }
+
+
 }
