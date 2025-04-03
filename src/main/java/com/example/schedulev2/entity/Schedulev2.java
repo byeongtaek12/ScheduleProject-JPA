@@ -20,7 +20,7 @@ public class Schedulev2 extends BaseEntity{
 
     private String contents;
 
-    public Schedulev2() {
+    protected Schedulev2() {
 
     }
 
