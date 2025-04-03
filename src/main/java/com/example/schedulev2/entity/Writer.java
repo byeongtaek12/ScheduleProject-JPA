@@ -23,7 +23,7 @@ public class Writer extends BaseEntity{
     @Column(nullable = false)
     private String password;
 
-    public Writer() {
+    protected Writer() {
 
     }
 
