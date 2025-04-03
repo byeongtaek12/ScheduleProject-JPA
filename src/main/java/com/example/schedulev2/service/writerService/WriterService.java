@@ -1,6 +1,6 @@
 package com.example.schedulev2.service.writerService;
 
-import com.example.schedulev2.dto.LoginResponseDto;
+import com.example.schedulev2.dto.loginDto.LoginResponseDto;
 import com.example.schedulev2.dto.writerDto.WriterRequestDto;
 import com.example.schedulev2.dto.writerDto.WriterResponseDto;
 import com.example.schedulev2.dto.writerDto.WriterUpdateResponseDto;
