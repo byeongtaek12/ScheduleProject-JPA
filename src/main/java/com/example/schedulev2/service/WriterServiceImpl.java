@@ -36,14 +36,14 @@ public class WriterServiceImpl implements WriterService{
     }
 
     @Override
-    public List<WriterResponseDto> findAll() {
+    public List<WriterResponseDto> findAllWriter() {
 
         return writerRepository.findAll().stream().map(WriterResponseDto::new).toList();
 
     }
 
     @Override
-    public WriterResponseDto findById(Long id) {
+    public WriterResponseDto findWriterById(Long id) {
 
         Writer findWriter = writerRepository.findByIdOrElseThrow(id);
 
@@ -76,7 +76,7 @@ public class WriterServiceImpl implements WriterService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteWriter(Long id) {
 
         Writer findWriter = writerRepository.findByIdOrElseThrow(id);
 
