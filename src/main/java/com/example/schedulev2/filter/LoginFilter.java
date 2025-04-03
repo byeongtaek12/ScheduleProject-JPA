@@ -5,12 +5,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 
 public class LoginFilter implements Filter {
-    private static final String  WHITE_LIST = "/login";  // 대문자로
+    private static final String [] WHITE_LIST = {"/login","/login/signup"};  // 대문자로
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
@@ -21,15 +22,23 @@ public class LoginFilter implements Filter {
 
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        if (!WHITE_LIST.equals(requestURI)) {
+        if (!isWhiteList(requestURI)) {
             HttpSession httpSession = request.getSession(false);
 
-            if (httpSession==null || httpSession.getAttribute("sessionKey")==null) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인이 필요합니다");
+            if (httpSession == null || httpSession.getAttribute("sessionKey") == null) {
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "로그인이 필요합니다");
             }
         }
 
+
         filterChain.doFilter(request,response);
+    }
+
+    // WHITE_LIST에 포함되어 있는지 확인하는 메서드
+    private boolean isWhiteList(String requestURI) {
+
+        return PatternMatchUtils.simpleMatch(WHITE_LIST,requestURI);
+
     }
 
 }
