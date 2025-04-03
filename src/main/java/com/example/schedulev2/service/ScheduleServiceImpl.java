@@ -6,9 +6,12 @@ import com.example.schedulev2.entity.Writer;
 import com.example.schedulev2.repository.ScheduleRepository;
 import com.example.schedulev2.repository.WriterRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +30,15 @@ public class ScheduleServiceImpl implements ScheduleService{
 
         return new ScheduleResponseDto(savedSchedule.getId(),savedSchedule.getWriter().getId(),
                 savedSchedule.getTitle(),savedSchedule.getContents(), LocalDateTime.now(),LocalDateTime.now());
+    }
+
+    @Override
+    public List<ScheduleResponseDto> findAllSchedule(Long writer_id) {
+
+        if (writer_id==null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"로그인부터 해주세요");
+        }
+
+        return scheduleRepository.findAll().stream().map(ScheduleResponseDto::new).toList();
     }
 }
