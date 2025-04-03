@@ -38,6 +38,16 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleResponseDtoList,HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> findScheduleById(@PathVariable Long id,
+                                                                HttpServletRequest httpServletRequest) {
+
+        ScheduleResponseDto findSchedule = scheduleService.findScheduleById(getSessionKey(httpServletRequest),id);
+
+        return new ResponseEntity<>(findSchedule, HttpStatus.OK);
+
+    }
+
 
 
     private Long getSessionKey(HttpServletRequest httpServletRequest) {
