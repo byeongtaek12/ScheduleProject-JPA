@@ -12,11 +12,11 @@ public interface WriterService {
 
     LoginResponseDto login(String email, String password);
 
-    List<WriterResponseDto> findAllWriter();
+    List<WriterResponseDto> findAllWriter(Long writer_id);
 
-    WriterResponseDto findWriterById(Long id);
+    WriterResponseDto findWriterById(Long writer_id,Long id);
 
-    WriterUpdateResponseDto updateWriter(Long id, WriterRequestDto writerRequestDto);
+    WriterUpdateResponseDto updateWriter(Long writer_id,Long id, WriterRequestDto writerRequestDto);
 
-    void deleteWriter(Long id);
+    void deleteWriter(Long writer_id,Long id);
 }
