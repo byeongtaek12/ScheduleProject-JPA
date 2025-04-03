@@ -11,7 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.IOException;
 
 public class LoginFilter implements Filter {
-    private static final String [] WHITE_LIST = {"/login","/login/signup"};  // 대문자로
+    private static final String [] WHITE_LIST = {"/login","/login/signup"};
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
