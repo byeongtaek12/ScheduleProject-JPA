@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LoginController {
 
+    private final static String SESSION_KEY = "sessionKey";
     private final WriterService writerService;
 
     // 회원가입
@@ -37,7 +38,7 @@ public class LoginController {
 
         HttpSession httpSession = request.getSession(true);
 
-        httpSession.setAttribute("sessionKey", loginResponseDto.getId());
+        httpSession.setAttribute(SESSION_KEY, loginResponseDto.getId());
 
         return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
