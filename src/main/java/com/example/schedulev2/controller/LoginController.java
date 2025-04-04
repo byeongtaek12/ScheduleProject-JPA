@@ -43,4 +43,17 @@ public class LoginController {
 
         return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
+
+    // 로그아웃
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+
+        HttpSession httpSession = request.getSession(false);
+
+        httpSession.invalidate();
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
 }
