@@ -1,5 +1,6 @@
 package com.example.schedulev2.service.writerService;
 
+import com.example.schedulev2.config.PasswordEncoder;
 import com.example.schedulev2.dto.loginDto.LoginResponseDto;
 import com.example.schedulev2.dto.writerDto.WriterRequestDto;
 import com.example.schedulev2.dto.writerDto.WriterResponseDto;
@@ -18,13 +19,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WriterServiceImpl implements WriterService {
     private final WriterRepository writerRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     // writerService) 회원가입 메서드
     @Override
     public LoginResponseDto signUp(String writer, String email, String password) {
 
-        Writer writer1 = new Writer(writer, email, password);
+        String encodedPassword = passwordEncoder.encode(password);
+
+        System.out.println(encodedPassword);
+
+        Writer writer1 = new Writer(writer, email, encodedPassword);
 
         Writer savedWriter = writerRepository.save(writer1);
 
@@ -35,9 +40,15 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public LoginResponseDto login(String email, String password) {
 
-        Writer findWriter = writerRepository.findWriterByEmailAndPassword(email,password)
+        System.out.println(password);
+
+        Writer findWriter = writerRepository.findWriterByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,
-                        "이메일이나 패스워드가 틀려서 로그인 실패했습니다."));
+                        "이메일이 틀려서 로그인 실패했습니다."));
+
+        if(!passwordEncoder.matches(password, findWriter.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"패스워드가 틀립니다");
+        }
 
         return new LoginResponseDto(findWriter.getId(),findWriter.getWriter());
     }
