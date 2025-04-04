@@ -26,7 +26,7 @@
 
   **인터페이스**
 
-    - HttpServletRequest / HttpServletResponse : 각 HTTP 요청에서 주고받는 값들을 담고 있습니다.
+- HttpServletRequest / HttpServletResponse : 각 HTTP 요청에서 주고받는 값들을 담고 있습니다.
 
 #### - Cookie/Session을 활용해 로그인 기능을 구현
 #### - 필터를 활용해 인증 처리
