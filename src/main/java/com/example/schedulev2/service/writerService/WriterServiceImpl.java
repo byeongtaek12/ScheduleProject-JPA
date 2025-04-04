@@ -10,6 +10,7 @@ import com.example.schedulev2.repository.WriterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class WriterServiceImpl implements WriterService {
     private final PasswordEncoder passwordEncoder;
 
     // writerService) 회원가입 메서드
+    @Transactional
     @Override
     public LoginResponseDto signUp(String writer, String email, String password) {
 
@@ -39,6 +41,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     // writerService) 로그인 메서드
+    @Transactional
     @Override
     public LoginResponseDto login(String email, String password) {
 
@@ -54,6 +57,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     // writerService) 모든 유저 조회 메서드
+    @Transactional
     @Override
     public List<WriterResponseDto> findAllWriter(Long writer_id) {
 
@@ -64,6 +68,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     // writerService) 유저 조회 메서드
+    @Transactional
     @Override
     public WriterResponseDto findWriterById(Long writer_id,Long id) {
 
@@ -75,6 +80,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     // writerService) 유저 수정 메서드
+    @Transactional
     @Override
     public WriterUpdateResponseDto updateWriter(Long writer_id,Long id, WriterRequestDto writerRequestDto) {
 
@@ -92,6 +98,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     // writerService) 유저 삭제 메서드
+    @Transactional
     @Override
     public void deleteWriter(Long writer_id,Long id) {
 

@@ -8,6 +8,7 @@ import com.example.schedulev2.repository.WriterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private final WriterRepository writerRepository;
 
     // service) 일정 저장 메서드
+    @Transactional
     @Override
     public ScheduleResponseDto saveSchedule(Long writer_id, String title, String contents) {
 
@@ -37,6 +39,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     // service) 모든 일정 조회 메서드
+    @Transactional
     @Override
     public List<ScheduleResponseDto> findAllSchedule(Long writer_id) {
 
@@ -47,6 +50,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     // service) 일정 조회 메서드
+    @Transactional
     @Override
     public ScheduleResponseDto findScheduleById(Long writer_id, Long id) {
 
@@ -57,6 +61,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     // service) 일정 수정 메서드
+    @Transactional
     @Override
     public ScheduleResponseDto updateSchedule(Long writer_id, Long id) {
 
@@ -69,6 +74,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     // service) 일정 삭제 메서드
+    @Transactional
     @Override
     public void deleteSchedule(Long writer_id, Long id) {
 
