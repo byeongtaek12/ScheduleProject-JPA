@@ -27,7 +27,9 @@ public class WriterServiceImpl implements WriterService {
 
         String encodedPassword = passwordEncoder.encode(password);
 
-        System.out.println(encodedPassword);
+        if (!writerRepository.findWriterByEmail(email).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.CONFLICT,"이미 존재하는 이메일입니다");
+        }
 
         Writer writer1 = new Writer(writer, email, encodedPassword);
 
@@ -40,11 +42,9 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public LoginResponseDto login(String email, String password) {
 
-        System.out.println(password);
-
         Writer findWriter = writerRepository.findWriterByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED,
-                        "이메일이 틀려서 로그인 실패했습니다."));
+                        "유저가 없습니다"));
 
         if(!passwordEncoder.matches(password, findWriter.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"패스워드가 틀립니다");
