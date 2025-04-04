@@ -27,7 +27,7 @@ public class WriterServiceImpl implements WriterService {
 
         String encodedPassword = passwordEncoder.encode(password);
 
-        if (!writerRepository.findWriterByEmail(email).isEmpty()){
+        if (writerRepository.findWriterByEmail(email).isPresent()){
             throw new ResponseStatusException(HttpStatus.CONFLICT,"이미 존재하는 이메일입니다");
         }
 
