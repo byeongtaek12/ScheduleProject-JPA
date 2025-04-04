@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface WriterRepository extends JpaRepository<Writer, Long> {
 
-    Optional<Writer> findWriterByEmailAndPassword(String email,String password);
+    Optional<Writer> findWriterByEmail(String email);
 
 }
